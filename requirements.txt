@@ -1,0 +1,5 @@
+numpy
+warp-lang
+open3d
+imageio[ffmpeg]
+pre-commit

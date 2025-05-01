@@ -18,15 +18,15 @@ class Camera:
     def __init__(self):
         ########## Init Config ##########
         self.aspect_ratio = 1.          # Ratio of image width over height
-        self.image_width = 100          # Rendered image width
+        self.image_width = 1000          # Rendered image width
         self.samples_per_pixel = 1      # Count of random samples per pixel
         self.max_depth = 1              # Max number of ray bounces into scene
-        
+
         self.vfov = 90.                     # Vertical view angle
         self.center = wp.vec3(0.)           # Point camera is looking from
         self.lookat = wp.vec3(0., 0., -1)   # Point camera is looking at
         self.vup = wp.vec3(0., 1., 0.)      # Up direction in camera's view
-        
+
         self.image_height = 0.              # Rendered image height
         self.pixel_samples_scale = 0.       # Color scale factor for a sum of pixel samples
         self.pixel00_loc = wp.vec3(0.)      # Location of pixel (0, 0)
@@ -35,7 +35,7 @@ class Camera:
         self.u = wp.vec3(0.)
         self.v = wp.vec3(0.)
         self.w = wp.vec3(0.)                # Camera frame basis vectors
-        
+
         self.image_height = max(1, int(self.image_width / self.aspect_ratio))
         self.pixel_samples_scale = 1. / float(self.samples_per_pixel)
         focal_length = wp.length(self.lookat - self.center)
@@ -53,13 +53,13 @@ class Camera:
         viewport_upper_left = self.center - (focal_length * self.w) \
                             - viewport_u / 2. - viewport_v / 2.
         self.pixel00_loc = viewport_upper_left + 0.5 * (self.pixel_delta_u + self.pixel_delta_v)
-        
+
         ########## Init Array ##########
         shape = (self.image_height, self.image_width)
         self.image = wp.zeros(shape, dtype=wp.vec3)
         self.rays = Rays(self.image_width, self.image_height, self.samples_per_pixel)
         self.get_rays()
-        
+
     def get_rays(self):
         self.rays.origin = self.center
         for index in range(self.samples_per_pixel):
@@ -69,4 +69,3 @@ class Camera:
                 inputs=[self.rays.origin, self.pixel00_loc, self.pixel_delta_u, self.pixel_delta_v],
                 outputs=[self.rays.direction[index]]
             )
-        
