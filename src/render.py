@@ -56,5 +56,5 @@ class Render:
             inputs=[object.mesh.id, ray_origin, ray_direction],
             outputs=[image],
         )
-        image_np = np.clip(image.numpy() * 255, 0, 255).astype(np.uint8)
+        image_np = np.flipud(np.clip(image.numpy() * 255, 0, 255).astype(np.uint8))
         imageio.imwrite(f"output/output.png", image_np)

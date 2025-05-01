@@ -12,3 +12,4 @@
 *.ply
 
 !data/*
+!output/output.png

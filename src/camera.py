@@ -22,9 +22,9 @@ class Camera:
         self.samples_per_pixel = 1      # Count of random samples per pixel
         self.max_depth = 1              # Max number of ray bounces into scene
 
-        self.vfov = 90.                     # Vertical view angle
-        self.center = wp.vec3(0.)           # Point camera is looking from
-        self.lookat = wp.vec3(0., 0., -1)   # Point camera is looking at
+        self.vfov = 50.                     # Vertical view angle
+        self.center = wp.vec3(4., 4., 4.)   # Point camera is looking from
+        self.lookat = wp.vec3(0., 0., 0.)   # Point camera is looking at
         self.vup = wp.vec3(0., 1., 0.)      # Up direction in camera's view
 
         self.image_height = 0.              # Rendered image height
