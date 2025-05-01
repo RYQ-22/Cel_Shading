@@ -1,0 +1,3 @@
+class Meterial:
+    def __init__(self):
+        ...
